@@ -1,0 +1,48 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="lookup.creationDate"></acme-navbar>
+  </div>
+
+  <div class="jumbotron text-center">
+    <h1>Dictionary Lookup</h1>
+    <p class="lead">
+      Enter filters for one or both fields and press "Run Query".
+    </p>
+  </div>
+
+  <div class="row">
+  <form nonvalidate  class="form-horizontal" ng-submit="lookup.filterQuery()">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Filter by Word</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Word" ng-model="lookup.filters.word"> 
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Filter by Definition</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Definition" ng-model="lookup.filters.def"> 
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default" ng-click="lookup.filterQuery()">Run Query</button>
+      </div>
+    </div>
+  </form>
+  <table class="table table-striped">
+    <p ng-bind="lookup.results"></p>
+    <tr>
+      <th>Word</th>
+      <th>Definition</th>
+    </tr>
+    <tr ng-repeat="x in lookup.results | orderBy: 'Word'">
+      <td ng-bind="x.Word" ></td>
+      <td ng-bind="x.Definition" ></td>
+    </tr>
+  </table>
+  <p ng-show="(lookup.results).length == 0" ng-bind="lookup.noRecords"></p> 
+  </div>
+
+</div>

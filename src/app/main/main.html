@@ -1,0 +1,44 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <div class="jumbotron text-center constrain">
+    <!-- <h1>Welcome!</h1> -->
+    <p class="small-text">
+      <cite>This SPA website is a portfolio for my sample web apps.</cite> <br>
+       - Adam Quintero
+    </p>
+    <p class="small-text">
+      Resume Available Upon Request: <a href="mailto:adam@angularadam.com?Subject=Website%20Response" target="_blank">adam@angularadam.com</a>
+    </p>
+    <p class="small-text">
+      Entire site source code available on <a ng-href="https://github.com/angularadam" target="_blank">GitHub</a>.
+    </p>
+    <!--
+    <p class="animated infinite" ng-class="main.classAnimation">
+      <button type="button" class="btn btn-lg btn-success" ng-click="main.showToastr()">Splendid Toastr</button>
+    </p>
+    -->
+    <p class="small-text">
+      Project powered by<acme-malarkey></acme-malarkey>
+    </p>
+  </div>
+
+  <div class="row constrain">
+    <div class="col-sm-6 col-md-4" ng-repeat="awesomeThing in main.awesomeThings | orderBy:'rank'">
+      <div class="thumbnail">
+        <img class="pull-right" ng-src="assets/images/{{ awesomeThing.logo }}" alt="{{ awesomeThing.title }}">
+        <div class="caption">
+          <h3>{{ awesomeThing.title }}</h3>
+          <p>{{ awesomeThing.description }}</p>
+          <p><a ng-link="{{awesomeThing.url}}">Run {{ awesomeThing.title }}</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>
+     I'm using AngularJS 1.4, written entirely in ECMAScript 2015 (ES6) and compiled to ES5 with Babel. This website is an intermediary step in the upgrade process from AngularJS 1.x to AngularJS 2.x. <a ng-href="http://angularadam.com/old/" target="_blank">Click to view the old ES5 home page</a>
+ </p>
+</div>

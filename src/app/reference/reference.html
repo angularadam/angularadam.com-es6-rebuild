@@ -1,0 +1,54 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="reference.creationDate"></acme-navbar>
+  </div>
+
+  <div class="jumbotron text-center">
+    <h1>AngularJS Reference</h1>
+    <p class="lead">
+      Enter filter to search for notes. Screen auto-smooth-scrolls on topic selection.
+    </p>
+  </div>
+
+  <div class="row">
+  <form nonvalidate  class="form-horizontal" ng-submit="reference.filterQuery()">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Search Keyword</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Topic" ng-keyup="reference.searchKeyup()" ng-model="reference.search.Keywords"> 
+      </div>
+    </div>
+  </form>
+  <table id="angularTable" class="table ng-cloak">
+    <p ng-bind="reference.showResultCount(filtered.length)"></p>
+    <tr>
+      <th>Topics</th>
+    </tr>
+    <tr ng-repeat-start="x in filtered  = (reference.topicResults | orderBy: 'Title' | filter: reference.search)">
+    </tr>
+    <tr ng-attr-id="{{reference.setTopicID(x.ID)}}" ng-class="reference.setTopicClass(x.highlightTopic)"
+        ng-scroller scroller-if="{{x.highlightTopic}}" scroller-easing="easeInOutQuint" scroller-offset="1" scroller-duration="600">
+      <th ng-click="reference.topicClick(x.ID)" ng-bind="x.Title"></th>
+    </tr>
+    <tr ng-attr-id="{{reference.setDescTitleID(x.ID)}}" ng-class="'success'" ng-show="x.showDesc"
+        ng-scroller scroller-to="{{reference.setTopicID(x.ID)}}" scroller-easing="easeInOutQuint" scroller-offset="1" scroller-duration="600">   
+      <th ng-click="reference.descClick(x.ID)">Descripton</th>
+    </tr>
+    <tr ng-attr-id="{{reference.setDescDataID(x.ID)}}" ng-class="'success'" ng-show="x.showDesc"
+        ng-scroller scroller-to="{{reference.setTopicID(x.ID)}}" scroller-easing="easeInOutQuint" scroller-offset="1" scroller-duration="600">   
+      <td ng-click="reference.descClick(x.ID)" ng-bind-html="x.Description" ></td>
+    </tr>
+    <tr ng-attr-id="{{reference.setNoteTitleID(x.ID)}}" ng-class="'warning'" ng-show="x.showNote"
+        ng-scroller scroller-to="{{reference.setTopicID(x.ID)}}" scroller-easing="easeInOutQuint" scroller-offset="1" scroller-duration="600">   
+      <th ng-click="reference.noteClick(x.ID)">Notes</th>
+    </tr>
+    <tr ng-attr-id="{{reference.setNoteDataID(x.ID)}}" ng-class="'warning'" ng-show="x.showNote"
+        ng-scroller scroller-to="{{reference.setTopicID(x.ID)}}" scroller-easing="easeInOutQuint" scroller-offset="1" scroller-duration="600">
+      <td ng-click="reference.noteClick(x.ID)" ng-bind-html="x.Note"></td>
+    </tr>
+    <tr ng-repeat-end="">
+    </tr>
+  </table>  </div>
+
+</div>

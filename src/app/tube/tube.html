@@ -1,0 +1,53 @@
+<div class="container" data-role="page" id="index">
+
+
+  <div data-role="panel"  data-display="overlay" data-position="left" id="mypanel">
+    <div data-role="list-divider">
+      <h4>Playlist</h4>
+    </div>
+    <ul data-role="listview"  dnd-list="tube.customPlaylist">
+      <li ng-repeat="x in tube.customPlaylist" >
+        <p>
+          <button class="videoremove" data-inline="true" ng-click="tube.playlistClick(x)">Play</button><button class="videoremove" data-inline="true" ng-click="tube.removeFromPlaylist(x)">Remove</button>
+          <b class="videoactive" ng-bind="x.active ? ' Now Playing' : ''"></b>
+          <img class="video-thumb-tiny" ng-src="{{x.snippet.thumbnails.default.url}}" ></img>
+          <br>
+          <cite class="video-title-tiny" ng-bind="x.snippet.title" ></cite>
+        </p>
+      </li>     
+    </ul>
+  </div><!-- /panel -->
+
+  <div data-role="header" data-theme="d">
+  <h1>YouTube Challenge</h1>
+  <button ng-disabled="tube.loggedIn" ng-click="tube.login()">Login</button>
+  </div><!-- /header -->
+
+  <div data-role="content" data-theme="c" >
+    <youtube  videoid="{{videoid}}" ng-cloak></youtube>
+    <p ng-bind-html="title" ng-cloak></p>
+    <form nonvalidate  class="form-horizontal" ng-submit="tube.searchList()">
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Search YouTube Videos</label>
+        <div class="col-lg-3">
+          <input type="text" class="form-control" placeholder="Search Terms" ng-model="tube.searchWords"> 
+        </div>
+        <div class="col-lg-1">
+          <button type="submit" class="btn btn-default" ng-click="tube.searchList()">Search</button>
+        </div>
+      </div>
+    </form>
+    <a data-role="button" href="#mypanel">Open Playlist</a>
+    <h4>YouTube Search Results</h4>
+    <ul  ng-cloak>
+      <li class="video-list-md" ng-show="x.snippet.title" ng-repeat="x in tube.results" ng-cloak>
+        <blockquote  ng-cloak>
+        <div class="videoaddbutton"><button  ng-click="tube.addToPlaylist(x)" >Add</button></div>
+        <img class="video-thumb-md" ng-src="{{x.snippet.thumbnails.default.url}}" ng-cloak></img>
+        <cite class="video-title" ng-bind="x.snippet.title" ng-cloak></cite>
+        </blockquote>
+      </li>
+    </ul> 
+  </div><!-- /content -->
+  
+</div><!-- /page -->
